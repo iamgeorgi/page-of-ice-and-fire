@@ -1,15 +1,22 @@
 import axios from 'axios';
 
-const getCharacters = async () => {
+export const getCharacters = async (page: string, pageSize: string) => {
     const response = await axios.get('https://www.anapioficeandfire.com/api/characters', {
         params: {
-            page: 1,
-            pageSize: 10
+            page: page,
+            pageSize: pageSize
         }
     })
 
     return response.data;
 }
 
+export const searchCharacters = async (term: string) => {
+    const response = await axios.get('https://www.anapioficeandfire.com/api/characters', {
+        params: {
+            name: term,
+        }
+    })
 
-export default getCharacters;
+    return response.data;
+}
