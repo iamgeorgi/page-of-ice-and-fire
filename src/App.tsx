@@ -1,30 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './App.css'
 import { getCharacters, searchCharacters } from './api/Api';
 import CharacterList from './components/characters/CharacterList';
-import SearchBar from './components/SearchBar';
+import SearchBar from './components/search/SearchBar';
+import FavoritesList from './components/favorites/FavoritesList';
+import CharactersContext from './context/characters';
 
 function App() {
-  const [characters, setCharacters] = useState([]);
+  const context = useContext(CharactersContext);
+
+  if (!context) {
+    throw new Error('App must be used within Provider');
+  }
+
+  const { fetchCharacters } = context;
 
   useEffect(() => {
-    const loadCharacters = async () => {
-      const res = await getCharacters('1', '20');
-      setCharacters(res);
-    }
-
-    loadCharacters();
+    fetchCharacters();
   }, [])
 
-  const onCharacterSearch = async (term: string) => {
-    const res = await searchCharacters(term);
-    setCharacters(res);
-  }
+  // const onCharacterSearch = async (term: string) => {
+  //   const res = await searchCharacters(term);
+  //   setCharacters(res);
+  // }
 
   return (
     <div className='main'>
-      <SearchBar onSubmit={onCharacterSearch} />
-      <CharacterList characters={characters} />
+      <h1>App of Ice and Fire</h1>
+      {/* <SearchBar onSubmit={onCharacterSearch} /> */}
+      <CharacterList />
+      <hr />
+      <FavoritesList />
     </div>
   )
 }

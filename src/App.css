@@ -186,3 +186,18 @@
 .main {
   margin: 150px 150px;
 }
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+  padding: 10px;
+}
+
+.card-center {
+  padding-left: 200px;
+}
+
+h1 {
+  padding-bottom: 20px;
+}
