@@ -1,19 +1,13 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import './App.css'
 import { getCharacters, searchCharacters } from './api/Api';
 import CharacterList from './components/characters/CharacterList';
 import SearchBar from './components/search/SearchBar';
 import FavoritesList from './components/favorites/FavoritesList';
-import CharactersContext from './context/characters';
+import useCharacters from './hooks/use-characters';
 
 function App() {
-  const context = useContext(CharactersContext);
-
-  if (!context) {
-    throw new Error('App must be used within Provider');
-  }
-
-  const { fetchCharacters } = context;
+  const { fetchCharacters } = useCharacters();
 
   useEffect(() => {
     fetchCharacters();

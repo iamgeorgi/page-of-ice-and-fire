@@ -1,14 +1,8 @@
-import { useContext } from "react";
-import CharactersContext from "../../context/characters";
 import CharacterCard from "../characters/CharacterCard";
+import useCharacters from "../../hooks/use-characters";
 
 function FavoritesList() {
-    const context = useContext(CharactersContext);
-
-    if (!context) {
-        throw new Error('FavoritesList must be used within a Provider');
-    }
-    const { favoriteCharacters } = context;
+    const { favoriteCharacters } = useCharacters();
 
     const favoriteCharactersRender = 
         favoriteCharacters.map((char: any) => <CharacterCard key={char.url} character={char} section="favorites" />)

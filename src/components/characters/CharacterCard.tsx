@@ -1,13 +1,7 @@
-import { useContext } from "react";
-import CharactersContext from "../../context/characters";
+import useCharacters from '../../hooks/use-characters';
 
 function CharacterCard({ character, section }: any) {
-    const context = useContext(CharactersContext);
-
-    if (!context) {
-        throw new Error('FavoritesList must be used within a Provider');
-    }
-    const { addToFavorites, removeFromFavorites } = context;
+    const { addToFavorites, removeFromFavorites } = useCharacters();
 
     const name = character.name;
     const aliases = character.aliases[0];
